@@ -26,7 +26,12 @@ jobs:
       - run: npm --prefix functions install
       - run: npm --prefix functions run build
 
-   # Deploy using Firebase CLI with Service Account
-   - run: firebase deploy --only hosting,functions
-            env:
-              GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      # Write service account JSON to a file
+      - name: Set up GCP credentials
+        run: echo "${{ secrets.GCP_SA_KEY }}" > ${HOME}/gcp-key.json
+
+      # Deploy using Firebase CLI with Service Account
+      - name: Deploy to Firebase
+        run: firebase deploy --only hosting,functions
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ HOME }}/gcp-key.json
