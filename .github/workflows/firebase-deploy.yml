@@ -19,11 +19,11 @@ jobs:
       - run: npm install -g firebase-tools
 
       # Install and build frontend
-      - run: npm --prefix frontend ci
+      - run: npm --prefix frontend install
       - run: npm --prefix frontend run build
 
       # Install and build functions
-      - run: npm --prefix functions ci
+      - run: npm --prefix functions install
       - run: npm --prefix functions run build
 
       # Deploy using Firebase CLI
