@@ -16,8 +16,9 @@ jobs:
       - run: npm ci
       - run: npm --prefix frontend ci
       - run: npm --prefix frontend run build
-      - uses: - uses: w9jds/firebase-action@v1
+      - uses: w9jds/firebase-action@v1
         with:
           args: deploy --only hosting,functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
