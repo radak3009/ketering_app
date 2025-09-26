@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "ketering-app-495cd"
+  },
+  "targets": {
+    "ketering-app-495cd": {
+      "hosting": {
+        "frontend": [
+          "ketering-app-495cd"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
