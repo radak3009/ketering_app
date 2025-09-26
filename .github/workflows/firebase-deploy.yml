@@ -26,5 +26,7 @@ jobs:
       - run: npm --prefix functions install
       - run: npm --prefix functions run build
 
-      # Deploy using Firebase CLI
-      - run: firebase deploy --only hosting,functions --token "${{ secrets.FIREBASE_TOKEN }}"
+   # Deploy using Firebase CLI with Service Account
+   - run: firebase deploy --only hosting,functions
+            env:
+              GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
