@@ -16,7 +16,7 @@ jobs:
       - run: npm ci
       - run: npm --prefix frontend ci
       - run: npm --prefix frontend run build
-      - uses: w9jds/firebase-action@v2
+      - uses: - uses: w9jds/firebase-action@v1
         with:
           args: deploy --only hosting,functions
         env:
