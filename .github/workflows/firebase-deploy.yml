@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+  workflow_dispatch: # omogućava ručno pokretanje iz Actions taba
 
 jobs:
   build-and-deploy:
@@ -29,10 +29,10 @@ jobs:
 
       # Write service account JSON to a file
       - name: Set up GCP credentials
-        run: echo "${{ secrets.GCP_SA_KEY }}" > ${HOME}/gcp-key.json
+        run: echo "${{ secrets.GCP_SA_KEY }}" > $HOME/gcp-key.json
 
       # Deploy using Firebase CLI with Service Account
       - name: Deploy to Firebase
         run: firebase deploy --only hosting,functions
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ HOME }}/gcp-key.json
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp-key.json
