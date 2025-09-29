@@ -1,0 +1,11 @@
+# Ignore local service account keys and sensitive JSON
+ketering-app-495cd-e50ab93ecde4.json
+*.serviceaccount.json
+
+# Node modules
+frontend/node_modules/
+functions/node_modules/
+
+# Build outputs
+frontend/dist/
+functions/lib/
