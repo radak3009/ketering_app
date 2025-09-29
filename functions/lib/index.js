@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.onOrderCreate = exports.sendReminderForNextWeekCutoff = exports.confirmPickup = exports.createOrder = void 0;
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const admin = __importStar(require("firebase-admin"));
 admin.initializeApp();
 const db = admin.firestore();
@@ -132,7 +132,7 @@ exports.confirmPickup = functions.https.onCall(async (data, context) => {
 });
 exports.sendReminderForNextWeekCutoff = functions.pubsub.schedule('0 10 * * 4')
     .timeZone('Europe/Belgrade')
-    .onRun(async (context) => {
+    .onRun(async () => {
     const now = new Date();
     const cutoff = getNextWeekCutoff(now);
     const diffMs = cutoff.getTime() - now.getTime();
@@ -150,7 +150,7 @@ exports.sendReminderForNextWeekCutoff = functions.pubsub.schedule('0 10 * * 4')
     return null;
 });
 exports.onOrderCreate = functions.firestore.document('orders/{orderId}')
-    .onCreate(async (snap, context) => {
+    .onCreate(async (snap) => {
     const order = snap.data();
     const createdAt = order.createdAt ? (order.createdAt.toDate ? order.createdAt.toDate() : new Date()) : new Date();
     const dayKey = `${createdAt.getFullYear()}-${createdAt.getMonth() + 1}-${createdAt.getDate()}`;

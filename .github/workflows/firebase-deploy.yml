@@ -31,10 +31,10 @@ jobs:
       - name: Set up GCP credentials
         run: |
           echo '${{ secrets.GCP_SA_KEY }}' > $HOME/gcp-key.json
-          cat $HOME/gcp-key.json | head -n 20  # samo prvih 20 linija da vidimo da fajl postoji
+          # credentials file written for GOOGLE_APPLICATION_CREDENTIALS
 
       # Deploy using Firebase CLI with Service Account
       - name: Deploy to Firebase
-        run: firebase deploy --only hosting,functions
+        run: firebase deploy --only hosting,functions --non-interactive --project ${{ secrets.FIREBASE_PROJECT_ID }}
         env:
           GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp-key.json
